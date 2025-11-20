@@ -6,13 +6,34 @@
 }
 
 @theme inline {
+  /* Color Pallete */
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-primary: #ff005a;
+  --color-black-text: #071030;
+  --color-gray: #f8f8f8;
+  --color-gray-text: #667085;
+  /* Font Size */
+  --text-h1: 72px;
+  --text-h2: 56px;
+  --text-h3: 48px;
+  --text-h4: 42px;
+  --text-h5: 36px;
+  --text-h6: 32px;
+  --text-xxl: 40px;
+  --text-xl: 28px;
+  --text-lg: 24px;
+  --text-md: 20px;
+  --text-regular: 18px;
+  --text-sm: 16px;
+  --text-xs: 14px;
+  --text-xxs: 12px;
+  /* Font Family */
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
+@media (prefers-color-scheme: light) {
   :root {
     --background: #0a0a0a;
     --foreground: #ededed;
