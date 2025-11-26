@@ -1,5 +1,3 @@
-import "../../app/globals.css";
-
 interface InputProps extends React.HTMLAttributes<HTMLInputElement> {
   label: string;
 }

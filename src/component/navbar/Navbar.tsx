@@ -1,4 +1,3 @@
-import "../../app/globals.css";
 import Image from "next/image";
 import Button from "../button/Button";
 import { Logo } from "@/src/assets";

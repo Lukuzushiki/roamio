@@ -1,5 +1,4 @@
 import Navbar from "@/src/component/navbar/Navbar";
-import "../../../globals.css";
 
 import { HeroBg, Search } from "@/src/assets";
 import Image from "next/image";
