@@ -25,7 +25,7 @@ const Button = ({ label, variant = "primary", onClick }: ButtonProps) => {
       )}`}
       onClick={onClick}
     >
-      <p className="text-sm font-medium">{label}</p>
+      <p className="text-sm font-medium whitespace-nowrap">{label}</p>
     </button>
   );
 };

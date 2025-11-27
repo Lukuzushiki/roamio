@@ -1,3 +1,4 @@
+"use client";
 import {
   Australia,
   Europe,
@@ -78,6 +79,7 @@ const CountryList = () => {
         {countryListArr.map((country, index) => {
           return (
             <CountryCard
+              key={index}
               imageSrc={country.imageSrc}
               countryName={country.countryName}
               price={country.price}

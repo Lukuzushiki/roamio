@@ -1,5 +1,5 @@
-interface InputProps extends React.HTMLAttributes<HTMLInputElement> {
-  label: string;
+interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
+  label?: string;
 }
 
 const Input = ({ label, ...props }: InputProps) => {

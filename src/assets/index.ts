@@ -14,6 +14,10 @@ import Step2 from "./image/phone-1.png";
 import Step3 from "./image/phone-2.png";
 import TestimonialImg from "./image/testimonial.jpg";
 import Quote from "./image/quote.png";
+import Plus from "./image/plus.png";
+import Minus from "./image/minus.png";
+import LinkText from "./image/link-text.png";
+import LogoColor from "./image/logo-color.png";
 
 export {
   Logo,
@@ -32,4 +36,8 @@ export {
   Step3,
   TestimonialImg,
   Quote,
+  Plus,
+  Minus,
+  LinkText,
+  LogoColor,
 };
