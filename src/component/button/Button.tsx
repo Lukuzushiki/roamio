@@ -2,9 +2,15 @@ interface ButtonProps {
   label: string;
   variant: "primary" | "secondary" | "outline";
   onClick?: () => void;
+  buttonClassName?: string;
 }
 
-const Button = ({ label, variant = "primary", onClick }: ButtonProps) => {
+const Button = ({
+  label,
+  variant = "primary",
+  onClick,
+  buttonClassName,
+}: ButtonProps) => {
   const variantStyling = (variant: "primary" | "secondary" | "outline") => {
     switch (variant) {
       case "primary":
@@ -22,7 +28,7 @@ const Button = ({ label, variant = "primary", onClick }: ButtonProps) => {
     <button
       className={`rounded-full px-[24px] py-[16px] cursor-pointer transform duration-200 ${variantStyling(
         variant
-      )}`}
+      )} ${buttonClassName}`}
       onClick={onClick}
     >
       <p className="text-sm font-medium whitespace-nowrap">{label}</p>

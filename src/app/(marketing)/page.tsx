@@ -1,5 +1,4 @@
-import Image from "next/image";
-import Home from "./home/page";
+import Home from "./home/Home";
 
 export default function LandingPage() {
   return <Home />;

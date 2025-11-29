@@ -18,6 +18,10 @@ import Plus from "./image/plus.png";
 import Minus from "./image/minus.png";
 import LinkText from "./image/link-text.png";
 import LogoColor from "./image/logo-color.png";
+import HeroCheckoutBg from "./image/hero-checkout.jpg";
+import StarEmpty from "./icons/star-empty.svg";
+import StarFilled from "./icons/star-filled.svg";
+import Phone from "./icons/phone.svg";
 
 export {
   Logo,
@@ -40,4 +44,8 @@ export {
   Minus,
   LinkText,
   LogoColor,
+  HeroCheckoutBg,
+  StarEmpty,
+  StarFilled,
+  Phone,
 };
