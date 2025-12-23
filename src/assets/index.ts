@@ -22,6 +22,12 @@ import HeroCheckoutBg from "./image/hero-checkout.jpg";
 import StarEmpty from "./icons/star-empty.svg";
 import StarFilled from "./icons/star-filled.svg";
 import Phone from "./icons/phone.svg";
+import SuccessChecklist from "./animation/checklistSuccess.json";
+import FacebookIcon from "./image/Social icon - FB.png";
+import TwitterIcon from "./image/Social icon - Twitter.png";
+import InstagramIcon from "./image/Social icon - IG.png";
+import EmailTemplateImg from "./image/email-template.png";
+import EmailStep from "./image/email-step.png";
 
 export {
   Logo,
@@ -48,4 +54,10 @@ export {
   StarEmpty,
   StarFilled,
   Phone,
+  SuccessChecklist,
+  FacebookIcon,
+  TwitterIcon,
+  InstagramIcon,
+  EmailTemplateImg,
+  EmailStep,
 };

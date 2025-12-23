@@ -3,6 +3,7 @@ interface ButtonProps {
   variant: "primary" | "secondary" | "outline";
   onClick?: () => void;
   buttonClassName?: string;
+  disabled?: boolean;
 }
 
 const Button = ({
@@ -10,6 +11,7 @@ const Button = ({
   variant = "primary",
   onClick,
   buttonClassName,
+  disabled = false,
 }: ButtonProps) => {
   const variantStyling = (variant: "primary" | "secondary" | "outline") => {
     switch (variant) {
@@ -30,6 +32,7 @@ const Button = ({
         variant
       )} ${buttonClassName}`}
       onClick={onClick}
+      disabled={disabled}
     >
       <p className="text-sm font-medium whitespace-nowrap">{label}</p>
     </button>

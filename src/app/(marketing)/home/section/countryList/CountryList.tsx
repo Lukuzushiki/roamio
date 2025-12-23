@@ -1,67 +1,13 @@
 "use client";
-import {
-  Australia,
-  Europe,
-  Germany,
-  Indonesia,
-  Japan,
-  Marocco,
-  UnitedKingdom,
-  UnitedStates,
-} from "@/src/assets";
+import { useGetCountryList } from "@/src/services/useGetCountryList";
+import { useRouter } from "next/navigation";
 import CountryCard from "./component/CountryCard/CountryCard";
 
 const CountryList = () => {
-  const countryListArr = [
-    {
-      imageSrc: Europe,
-      countryName: "Europe",
-      price: "$10",
-      onClick: () => {},
-    },
-    {
-      imageSrc: Australia,
-      countryName: "Australia",
-      price: "$10",
-      onClick: () => {},
-    },
-    {
-      imageSrc: UnitedStates,
-      countryName: "United States",
-      price: "$10",
-      onClick: () => {},
-    },
-    {
-      imageSrc: Indonesia,
-      countryName: "Indonesia",
-      price: "$10",
-      onClick: () => {},
-    },
-    {
-      imageSrc: Germany,
-      countryName: "Germany",
-      price: "$10",
-      onClick: () => {},
-    },
-    {
-      imageSrc: UnitedKingdom,
-      countryName: "United Kingdom",
-      price: "$10",
-      onClick: () => {},
-    },
-    {
-      imageSrc: Marocco,
-      countryName: "Marocco",
-      price: "$10",
-      onClick: () => {},
-    },
-    {
-      imageSrc: Japan,
-      countryName: "Japan",
-      price: "$10",
-      onClick: () => {},
-    },
-  ];
+  const router = useRouter();
+  const { countryListData, countryListIsLoading, countryListIsSuccess } =
+    useGetCountryList();
+
   return (
     <div className="py-[80px] flex flex-col justify-center items-center">
       <h2 className="text-h2 text-black-text">
@@ -76,17 +22,22 @@ const CountryList = () => {
       </p>
 
       <div className="mt-[80px] grid grid-cols-4 gap-x-[32px] gap-y-[32px]">
-        {countryListArr.map((country, index) => {
-          return (
-            <CountryCard
-              key={index}
-              imageSrc={country.imageSrc}
-              countryName={country.countryName}
-              price={country.price}
-              onClick={country.onClick}
-            />
-          );
-        })}
+        {!countryListIsLoading &&
+          countryListIsSuccess &&
+          countryListData?.map((country, index) => {
+            return (
+              <CountryCard
+                key={index}
+                imageSrc={country.imageSrc}
+                countryName={country.countryName}
+                price={country.price}
+                provider={country.provider}
+                onClick={() => {
+                  router.push(`/checkout/${country.id}`);
+                }}
+              />
+            );
+          })}
       </div>
     </div>
   );

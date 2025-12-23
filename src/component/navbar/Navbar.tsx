@@ -1,8 +1,10 @@
 import Image from "next/image";
 import Button from "../button/Button";
 import { Logo } from "@/src/assets";
+import { useRouter } from "next/navigation";
 
 const Navbar = () => {
+  const router = useRouter();
   return (
     <nav className="w-full rounded-full bg-white/10 backdrop-blur-2xl flex justify-between items-center px-[48px] py-[16px]">
       <div>
@@ -42,7 +44,13 @@ const Navbar = () => {
           FAQ
         </a>
       </div>
-      <Button label="Get Started" variant="secondary" />
+      <Button
+        label="Get Started"
+        variant="secondary"
+        onClick={() => {
+          router.push("/auth/login");
+        }}
+      />
     </nav>
   );
 };

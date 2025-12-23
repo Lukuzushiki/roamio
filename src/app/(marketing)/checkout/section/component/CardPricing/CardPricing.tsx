@@ -1,6 +1,6 @@
 export interface CardPricingProps {
   isSelected?: boolean;
-  quoata: string;
+  quota: string;
   price: number;
   validity: number;
   onClick?: () => void;
@@ -8,7 +8,7 @@ export interface CardPricingProps {
 
 const CardPricing = ({
   isSelected,
-  quoata,
+  quota,
   price,
   validity,
   onClick,
@@ -23,12 +23,12 @@ const CardPricing = ({
       onClick={onClick}
     >
       <div className="flex justify-between items-center">
-        <p className="text-lg font-regular text-black-text">{quoata}</p>
+        <p className="text-lg font-regular text-black-text">{quota}</p>
         <p className="text-lg font-semibold text-primary">${price}</p>
       </div>
       <div className="flex justify-between items-center mt-[16px]">
         <p className="text-xxs font-regular text-black-text">Data</p>
-        <p className="text-xs font-medium text-black-text">{quoata}</p>
+        <p className="text-xs font-medium text-black-text">{quota}</p>
       </div>
       <div className="w-full h-[1px] bg-grey-border my-[8px]" />
       <div className="flex justify-between items-center mt-[16px]">

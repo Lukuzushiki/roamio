@@ -1,0 +1,133 @@
+import { ProductDetailResponse } from "@/src/services/type";
+
+export const productDataList: ProductDetailResponse[] = [
+  {
+    id: 1,
+    quota: "1 GB",
+    price: 3.99,
+    validity: 30,
+    type: "DATA",
+  },
+  {
+    id: 2,
+    quota: "3 GB",
+    price: 8.99,
+    validity: 30,
+    type: "DATA",
+  },
+  {
+    id: 3,
+    quota: "5 GB",
+    price: 11.99,
+    validity: 30,
+    type: "DATA",
+  },
+  {
+    id: 4,
+    quota: "10 GB",
+    price: 19.99,
+    validity: 30,
+    type: "DATA",
+  },
+  {
+    id: 5,
+    quota: "15 GB",
+    price: 31.99,
+    validity: 30,
+    type: "DATA",
+  },
+  {
+    id: 6,
+    quota: "20 GB",
+    price: 49.99,
+    validity: 30,
+    type: "DATA",
+  },
+  {
+    id: 7,
+    quota: "30 GB",
+    price: 59.99,
+    validity: 30,
+    type: "DATA",
+  },
+  {
+    id: 8,
+    quota: "50 GB",
+    price: 69.99,
+    validity: 30,
+    type: "DATA",
+  },
+  {
+    id: 9,
+    quota: "100 GB",
+    price: 80.99,
+    validity: 30,
+    type: "DATA",
+  },
+];
+
+export const productUnlimitedList: ProductDetailResponse[] = [
+  {
+    id: 1,
+    quota: "Unlimited",
+    price: 3.99,
+    validity: 1,
+    type: "UNLIMITED",
+  },
+  {
+    id: 2,
+    quota: "Unlimited",
+    price: 8.99,
+    validity: 3,
+    type: "UNLIMITED",
+  },
+  {
+    id: 3,
+    quota: "Unlimited",
+    price: 11.99,
+    validity: 7,
+    type: "UNLIMITED",
+  },
+  {
+    id: 4,
+    quota: "Unlimited",
+    price: 19.99,
+    validity: 14,
+    type: "UNLIMITED",
+  },
+  {
+    id: 5,
+    quota: "Unlimited",
+    price: 31.99,
+    validity: 30,
+    type: "UNLIMITED",
+  },
+  {
+    id: 6,
+    quota: "Unlimited",
+    price: 49.99,
+    validity: 30,
+    type: "UNLIMITED",
+  },
+  {
+    id: 7,
+    quota: "Unlimited",
+    price: 59.99,
+    validity: 30,
+    type: "UNLIMITED",
+  },
+  {
+    id: 8,
+    quota: "Unlimited",
+    price: 69.99,
+    validity: 30,
+    type: "UNLIMITED",
+  },
+  {
+    id: 9,
+    quota: "Unlimited",
+    price: 80.99,
+    validity: 30,
+    type: "UNLIMITED",
+  },
+];

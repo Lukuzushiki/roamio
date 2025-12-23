@@ -2,8 +2,25 @@ import { LogoColor } from "@/src/assets";
 import Button from "@/src/component/button/Button";
 import Input from "@/src/component/input/Input";
 import Image from "next/image";
+import Link from "next/link";
 
-const LoginForm = () => {
+interface LoginFormProps {
+  onChangeEmail?: (email: string) => void;
+  onChangePassword?: (password: string) => void;
+  onSubmit?: () => void;
+  isErrorAuthUser?: boolean;
+  isIdleAuthUser?: boolean;
+  errorMessage?: string;
+}
+
+const LoginForm = ({
+  onChangeEmail,
+  onChangePassword,
+  onSubmit,
+  isErrorAuthUser,
+  isIdleAuthUser,
+  errorMessage,
+}: LoginFormProps) => {
   return (
     <div className="bg-white rounded-3xl flex justify-center items-center flex-col p-[48px] w-[480px]">
       <Image src={LogoColor} alt="logo" />
@@ -18,12 +35,19 @@ const LoginForm = () => {
         Sign in to Roamio Center to manage it.
       </p>
 
+      {isErrorAuthUser && (
+        <div className="mt-[32px] bg-red-100 rounded-md p-[12px] w-full text-center">
+          <p>{isErrorAuthUser && errorMessage}</p>
+        </div>
+      )}
+
       <div className="flex justify-center items-center mt-[32px]">
         <Input
           type="email"
           placeholder="Email"
           label="Email"
           inputClassName="w-[384px]"
+          onChange={(e) => onChangeEmail && onChangeEmail(e.target.value)}
         />
       </div>
 
@@ -34,19 +58,26 @@ const LoginForm = () => {
           placeholder="Password"
           label="Password"
           inputClassName="w-[384px]"
+          onChange={(e) => onChangePassword && onChangePassword(e.target.value)}
         />
       </div>
 
       <div className="w-full mt-[16px]">
-        <Button label="Sign in" variant="primary" buttonClassName="w-full" />
+        <Button
+          label="Sign in"
+          variant="primary"
+          buttonClassName="w-full"
+          onClick={onSubmit}
+          disabled={!isIdleAuthUser}
+        />
       </div>
 
       <div className="flex justify-center items-center mt-[32px]">
         <p className="text-regular text-black-text font-regular">
           Don’t have an account?{" "}
-          <a href="/signup" className="text-primary">
+          <Link href="/auth/register" className="text-primary">
             Sign Up
-          </a>
+          </Link>
         </p>
       </div>
     </div>

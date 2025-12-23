@@ -5,79 +5,36 @@ import Image from "next/image";
 import { useState } from "react";
 import CardPricing, { CardPricingProps } from "../CardPricing/CardPricing";
 import Rating from "../Rating/Rating";
+import { CountryDetailResponse } from "@/src/services/type";
 
-interface ListProductProps extends CardPricingProps {
+export interface ListProductProps extends CardPricingProps {
   id: number;
+  type: "DATA" | "UNLIMITED";
 }
 
-const PriceList = () => {
-  const listProduct: ListProductProps[] = [
-    {
-      id: 1,
-      quoata: "1 GB",
-      price: 3.99,
-      validity: 30,
-    },
-    {
-      id: 2,
-      quoata: "3 GB",
-      price: 8.99,
-      validity: 30,
-    },
-    {
-      id: 3,
-      quoata: "5 GB",
-      price: 11.99,
-      validity: 30,
-    },
-    {
-      id: 4,
-      quoata: "10 GB",
-      price: 19.99,
-      validity: 30,
-    },
-    {
-      id: 5,
-      quoata: "15 GB",
-      price: 31.99,
-      validity: 30,
-    },
-    {
-      id: 6,
-      quoata: "20 GB",
-      price: 49.99,
-      validity: 30,
-    },
-    {
-      id: 7,
-      quoata: "30 GB",
-      price: 59.99,
-      validity: 30,
-    },
-    {
-      id: 8,
-      quoata: "50 GB",
-      price: 69.99,
-      validity: 30,
-    },
-    {
-      id: 9,
-      quoata: "100 GB",
-      price: 80.99,
-      validity: 30,
-    },
-  ];
+export interface PriceListProps {
+  listProducts: ListProductProps[];
+  countryDetail: CountryDetailResponse;
+  onCheckout: (product: ListProductProps) => void;
+}
 
+const PriceList = ({
+  listProducts,
+  countryDetail,
+  onCheckout,
+}: PriceListProps) => {
   const [productSelected, setProductSelected] =
     useState<ListProductProps | null>(null);
-  const [tabIndex, setTabIndex] = useState(0);
+  const [tabIndex, setTabIndex] = useState<"DATA" | "UNLIMITED">("DATA");
   return (
     <div className="bg-white rounded-4xl p-[32px]">
       {/* NOTE: Breadcrumbs */}
       <div className="flex items-center">
         <p className="text-xs text-black font-regular">Home</p>
         <p className="text-xs text-black font-regular px-[8px]">{">"}</p>
-        <p className="text-xs text-black font-medium">Indonesia</p>
+        <p className="text-xs text-black font-medium">
+          {countryDetail.countryName}
+        </p>
       </div>
 
       {/* NOTE: Selected Country */}
@@ -85,12 +42,16 @@ const PriceList = () => {
         <div>
           <div className="flex items-center">
             <Image
-              src={Indonesia}
+              src={
+                countryDetail.imageSrc === ""
+                  ? Indonesia
+                  : countryDetail.imageSrc
+              }
               alt="country-flag"
               className="w-[38px] h-[38px] rounded-full"
             />
             <h4 className="text-h4 pl-[16px] text-black font-medium">
-              Indonesia
+              {countryDetail.countryName}
             </h4>
           </div>
 
@@ -118,17 +79,17 @@ const PriceList = () => {
       >
         <div
           className={`px-[12px] py-[10px] rounded-full cursor-pointer transition duration-500 ${
-            tabIndex === 0 ? "bg-white" : ""
+            tabIndex === "DATA" ? "bg-white" : ""
           }`}
-          onClick={() => setTabIndex(0)}
+          onClick={() => setTabIndex("DATA")}
         >
           <p className="text-xs font-medium text-black-text">Data Package</p>
         </div>
         <div
           className={`px-[12px] py-[10px] rounded-full cursor-pointer transition duration-500 ${
-            tabIndex === 1 ? "bg-white" : ""
+            tabIndex === "UNLIMITED" ? "bg-white" : ""
           }`}
-          onClick={() => setTabIndex(1)}
+          onClick={() => setTabIndex("UNLIMITED")}
         >
           <p className="text-xs font-medium text-black-text">Unlimited Data</p>
         </div>
@@ -136,22 +97,24 @@ const PriceList = () => {
 
       {/* NOTE: Product list */}
       <div className="grid grid-cols-3 gap-[24px] mt-[32px]">
-        {listProduct.map((item, index) => {
-          return (
-            <CardPricing
-              key={index}
-              {...item}
-              onClick={() => setProductSelected(item)}
-              isSelected={productSelected?.id === item.id}
-            />
-          );
-        })}
+        {listProducts
+          .filter((x) => x.type === tabIndex)
+          .map((item, index) => {
+            return (
+              <CardPricing
+                key={index}
+                {...item}
+                onClick={() => setProductSelected(item)}
+                isSelected={productSelected?.id === item.id}
+              />
+            );
+          })}
       </div>
 
       {/* NOTE: Button */}
       <button
         className={`rounded-full px-[24px] py-[16px] cursor-pointer transform duration-200 bg-primary text-white w-full mt-[32px]`}
-        onClick={() => {}}
+        onClick={() => productSelected && onCheckout(productSelected)}
       >
         <div className="flex justify-between items-center">
           <p className="text-sm font-medium whitespace-nowrap">Purchase</p>
@@ -161,7 +124,10 @@ const PriceList = () => {
             <div>
               <p className="text-xxs text-white font-medium">Total</p>
               <p className="text-xxs text-white font-medium">
-                <span className="font-semibold">$55</span> USD
+                <span className="font-semibold">
+                  {productSelected ? productSelected?.price : "$0"}
+                </span>{" "}
+                USD
               </p>
             </div>
           </div>

@@ -2,8 +2,21 @@ import { LogoColor } from "@/src/assets";
 import Button from "@/src/component/button/Button";
 import Input from "@/src/component/input/Input";
 import Image from "next/image";
+import Link from "next/link";
 
-const RegisterForm = () => {
+interface RegisterFormProps {
+  onChangeName?: (name: string) => void;
+  onChangeEmail?: (email: string) => void;
+  onChangePassword?: (password: string) => void;
+  onSubmit?: () => void;
+}
+
+const RegisterForm = ({
+  onChangeName,
+  onChangeEmail,
+  onChangePassword,
+  onSubmit,
+}: RegisterFormProps) => {
   return (
     <div className="bg-white rounded-3xl flex justify-center items-center flex-col p-[48px] w-[480px]">
       <Image src={LogoColor} alt="logo" />
@@ -24,6 +37,7 @@ const RegisterForm = () => {
           placeholder="Name"
           label="Name"
           inputClassName="w-[384px]"
+          onChange={(e) => onChangeName && onChangeName(e.target.value)}
         />
       </div>
 
@@ -33,6 +47,7 @@ const RegisterForm = () => {
           placeholder="Email"
           label="Email"
           inputClassName="w-[384px]"
+          onChange={(e) => onChangeEmail && onChangeEmail(e.target.value)}
         />
       </div>
 
@@ -43,19 +58,25 @@ const RegisterForm = () => {
           placeholder="Password"
           label="Password"
           inputClassName="w-[384px]"
+          onChange={(e) => onChangePassword && onChangePassword(e.target.value)}
         />
       </div>
 
       <div className="w-full mt-[16px]">
-        <Button label="Sign Up" variant="primary" buttonClassName="w-full" />
+        <Button
+          label="Sign Up"
+          variant="primary"
+          buttonClassName="w-full"
+          onClick={onSubmit}
+        />
       </div>
 
       <div className="flex justify-center items-center mt-[32px]">
         <p className="text-regular text-black-text font-regular">
           Already have an account?{" "}
-          <a href="/auth/login" className="text-primary">
+          <Link href="/auth/login" className="text-primary">
             Sign In
-          </a>
+          </Link>
         </p>
       </div>
     </div>
