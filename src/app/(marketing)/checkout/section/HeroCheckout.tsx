@@ -1,6 +1,5 @@
 import { HeroCheckoutBg } from "@/src/assets";
 import Navbar from "@/src/component/navbar/Navbar";
-import { getStripe } from "@/src/lib/helper/stripe";
 import { CountryDetailResponse } from "@/src/services/type";
 import { useCheckoutProduct } from "@/src/services/useCheckoutProduct";
 import { useRouter } from "next/navigation";
@@ -17,8 +16,6 @@ const HeroCheckout = ({ listProducts, countryDetail }: HeroCheckoutProps) => {
   const {
     mutateAsyncUseCheckoutProduct,
     isSuccessUseCheckoutProduct,
-    isErrorUseCheckoutProduct,
-    errorUseCheckoutProduct,
     dataUseCheckoutProduct,
   } = useCheckoutProduct();
 
@@ -30,32 +27,39 @@ const HeroCheckout = ({ listProducts, countryDetail }: HeroCheckoutProps) => {
     }
   };
 
-  const stripeHandlerCheckout = async () => {
-    return await getStripe().checkout.sessions.create({
-      success_url: "http://localhost:3000/success",
-      line_items: [
-        {
-          price_data: {
-            currency: "usd",
-            product_data: {
-              name: `Roamio - ${dataUseCheckoutProduct?.type} Plan`,
-            },
-            unit_amount: Math.round((dataUseCheckoutProduct?.price || 1) * 100),
-          },
-          quantity: 1,
-        },
-      ],
-      mode: "payment",
+  const stripeHandlerCheckout = async (
+    checkoutData: Pick<ListProductProps, "price" | "type">,
+  ) => {
+    const response = await fetch("/api/checkout", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        price: checkoutData.price,
+        type: checkoutData.type,
+      }),
     });
+
+    if (!response.ok) {
+      const result = (await response.json()) as { error?: string };
+      throw new Error(result.error || "Failed to create checkout session");
+    }
+
+    return (await response.json()) as { url?: string };
   };
 
   useEffect(() => {
     if (isSuccessUseCheckoutProduct && dataUseCheckoutProduct) {
-      stripeHandlerCheckout().then((session) => {
-        router.push(session.url || "/success");
-      });
+      stripeHandlerCheckout(dataUseCheckoutProduct)
+        .then((session) => {
+          router.push(session.url || "/success");
+        })
+        .catch((error) => {
+          console.error("Stripe checkout failed:", error);
+        });
     }
-  }, [isSuccessUseCheckoutProduct, dataUseCheckoutProduct]);
+  }, [isSuccessUseCheckoutProduct, dataUseCheckoutProduct, router]);
 
   return (
     <section
