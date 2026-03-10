@@ -1,15 +1,15 @@
 import { Resend } from "resend";
-import * as React from "react";
 import EmailTemplate from "@/src/assets/emailTemplate";
 
-export async function POST() {
+export async function POST(request: Request) {
   const resend = new Resend(process.env.NEXT_PUBLIC_API_KEY_RESEND);
+  const baseUrl = new URL(request.url).origin;
   try {
     const { data, error } = await resend.emails.send({
       from: "Acme <onboarding@resend.dev>",
       to: ["febriwardhana20@gmail.com"],
       subject: "Hello world",
-      react: EmailTemplate({ fullName: "Lukuzushiki" }),
+      react: EmailTemplate({ fullName: "Lukuzushiki", baseUrl }),
     });
 
     if (error) {

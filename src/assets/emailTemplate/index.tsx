@@ -1,18 +1,27 @@
 import { Button, Html } from "@react-email/components";
-import {
-  EmailStep,
-  EmailTemplateImg,
-  FacebookIcon,
-  InstagramIcon,
-  Logo,
-  TwitterIcon,
-} from "..";
 
 interface EmailTemplateProps {
   fullName?: string;
+  baseUrl?: string;
 }
 
-const EmailTemplate = ({ fullName }: EmailTemplateProps) => {
+const normalizeBaseUrl = (url?: string) => {
+  if (!url) return "";
+  return url.endsWith("/") ? url.slice(0, -1) : url;
+};
+
+const fallbackBaseUrl = normalizeBaseUrl(
+  process.env.NEXT_PUBLIC_SITE_URL ||
+    process.env.NEXT_PUBLIC_APP_URL ||
+    process.env.NEXT_PUBLIC_BASE_URL ||
+    (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : undefined),
+);
+
+const EmailTemplate = ({ fullName, baseUrl }: EmailTemplateProps) => {
+  const resolvedBaseUrl = normalizeBaseUrl(baseUrl) || fallbackBaseUrl;
+  const assetUrl = (path: string) =>
+    resolvedBaseUrl ? `${resolvedBaseUrl}${path}` : path;
+
   return (
     <Html lang="en">
       <div
@@ -30,7 +39,10 @@ const EmailTemplate = ({ fullName }: EmailTemplateProps) => {
             alignItems: "center",
           }}
         >
-          <img src={Logo.src} alt="Logo" />
+          <img
+            src={assetUrl("/logo.png")}
+            alt="Logo"
+          />
 
           <div
             style={{
@@ -40,9 +52,18 @@ const EmailTemplate = ({ fullName }: EmailTemplateProps) => {
               alignItems: "center",
             }}
           >
-            <img src={FacebookIcon.src} alt="Facebook" />
-            <img src={TwitterIcon.src} alt="Twitter" />
-            <img src={InstagramIcon.src} alt="Instagram" />
+            <img
+              src={assetUrl("/Social icon - FB.png")}
+              alt="Facebook"
+            />
+            <img
+              src={assetUrl("/Social icon - Twitter.png")}
+              alt="Twitter"
+            />
+            <img
+              src={assetUrl("/Social icon - IG.png")}
+              alt="Instagram"
+            />
           </div>
         </div>
 
@@ -55,7 +76,10 @@ const EmailTemplate = ({ fullName }: EmailTemplateProps) => {
             marginBottom: "16px",
           }}
         >
-          <img src={EmailTemplateImg.src} alt="Email Template" />
+          <img
+            src={assetUrl("/email-template.png")}
+            alt="Email Template"
+          />
         </div>
 
         <div>
@@ -111,7 +135,10 @@ const EmailTemplate = ({ fullName }: EmailTemplateProps) => {
                   alignItems: "center",
                 }}
               >
-                <img src={EmailStep.src} alt="Email Step" />
+                <img
+                  src={assetUrl("/email-step.png")}
+                  alt="Email Step"
+                />
                 <p
                   style={{
                     fontSize: "14px",
@@ -140,7 +167,7 @@ const EmailTemplate = ({ fullName }: EmailTemplateProps) => {
                   alignItems: "center",
                 }}
               >
-                <img src={EmailStep.src} alt="Email Step" />
+                <img src={assetUrl("/email-step.png")} alt="Email Step" />
                 <p
                   style={{
                     fontSize: "14px",
@@ -169,7 +196,7 @@ const EmailTemplate = ({ fullName }: EmailTemplateProps) => {
                   alignItems: "center",
                 }}
               >
-                <img src={EmailStep.src} alt="Email Step" />
+                <img src={assetUrl("/email-step.png")} alt="Email Step" />
                 <p
                   style={{
                     fontSize: "14px",
