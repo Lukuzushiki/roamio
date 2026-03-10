@@ -36,9 +36,7 @@ const LoginPage = () => {
         isErrorAuthUser={isErrorAuthUser}
         isIdleAuthUser={isIdleAuthUser}
         errorMessage={
-          errorAuthUser
-            ? (errorAuthUser as Error).response.data.message
-            : undefined
+          errorAuthUser ? (errorAuthUser as Error).message : undefined
         }
       />
     </div>

@@ -1,7 +1,8 @@
 import type { Meta, StoryObj } from "@storybook/nextjs-vite";
 
 import { fn } from "storybook/test";
-import PriceList from "./PriceList";
+import PriceList, { ListProductProps } from "./PriceList";
+import { CountryDetailResponse } from "@/src/services/type";
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
 const meta = {
@@ -23,5 +24,9 @@ type Story = StoryObj<typeof meta>;
 
 // More on writing stories with args: https://storybook.js.org/docs/writing-stories/args
 export const Primary: Story = {
-  args: {},
+  args: {
+    listProducts: [],
+    countryDetail: {} as CountryDetailResponse,
+    onCheckout: (product: ListProductProps) => {},
+  },
 };

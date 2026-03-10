@@ -27,6 +27,7 @@ export const Primary: Story = {
   args: {
     imageSrc: Europe,
     countryName: "Europe",
-    price: "$10",
+    price: 10,
+    provider: "Roamio",
   },
 };

@@ -25,7 +25,7 @@ type Story = StoryObj<typeof meta>;
 export const Primary: Story = {
   args: {
     isSelected: true,
-    quoata: "1 GB",
+    quota: "1 GB",
     price: 3.99,
     validity: 30,
   },
