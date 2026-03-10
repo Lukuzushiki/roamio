@@ -7,10 +7,10 @@ export function MSWProvider({ children }: { children: React.ReactNode }) {
 
   useEffect(() => {
     async function enableMocks() {
-      if (process.env.NODE_ENV === "development") {
-        const { initMsw } = await import("@/src/lib/msw/init");
-        await initMsw();
-      }
+      // if (process.env.NODE_ENV === "development") {
+      const { initMsw } = await import("@/src/lib/msw/init");
+      await initMsw();
+      // }
       setIsMockingEnabled(true);
     }
 
